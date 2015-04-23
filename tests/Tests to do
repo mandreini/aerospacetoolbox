@@ -1,0 +1,18 @@
+Tests to do:
+
+
+
+Tests done:
+utils
+unitconversions
+aerodynamics
+environment
+matlab
+
+Changelog:
+/aerotbx:        Refactored code globally on personal preference and small readibility
+/tests:          Added (utils/unit/aerodynamics/environment)_tests.py files to check the outputs, matlab_tests not needed
+utils.py:        Added AerotbxValueError to specify that the error raised is due to improper use of this module, not python errors.
+aerodynamics.py: Added check for real numbers
+setup.py:        Updated notes for python 3.x port
+matlab.py:       Removed density0 paramter from atmoslapse()

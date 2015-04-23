@@ -7,7 +7,7 @@ Wrappers for the matlab syntax from http://www.mathworks.nl/help/aerotbx/
 
 import aerotbx
 
-#Environment
+# Environment
 
 def atmosisa(height):
     """
@@ -18,18 +18,18 @@ def atmosisa(height):
     _, T, P, rho, a = aerotbx.stdatmos(geop=height)
     return T, a, rho, P
 
-def atmoslapse(height, g, heatRatio, characteristicGasConstant,
-               lapseRate, heightTroposphere, heightTropopause,
-               density0, pressure0, temperature0):
+def atmoslapse(height, g, heat_ratio, gas_const,
+               lapse_rate, height_troposphere, height_tropopause,
+               pressure0, temperature0):
     """
     Use Lapse Rate Atmosphere Model.
 
     http://www.mathworks.nl/help/aerotbx/ug/atmoslapse.html
     """
-    mdl = aerotbx.stdmodel(R=characteristicGasConstant, gamma=heatRatio,
+    mdl = aerotbx.stdmodel(R=gas_const, gamma=heat_ratio,
                            g0=g, T0=temperature0, P0=pressure0,
-                           lapserate=[-lapseRate, 0],
-                           layers=[0, heightTroposphere, heightTropopause])
+                           lapserate=[-lapse_rate, 0],
+                           layers=[0, height_troposphere, height_tropopause])
     _, T, P, rho, a = aerotbx.stdatmos(model=mdl, geop=height)
     return T, a, P, rho
 
@@ -51,7 +51,7 @@ def geoidegm96(lat, lon):
     N = aerotbx.geoidheight(lat, lon)
     return N
 
-#Gas Dynamics
+# Gas Dynamics
 
 def flowisentropic(gamma, flow, mtype='mach'):
     """
@@ -82,14 +82,14 @@ def flowprandtlmeyer(gamma, prandtlmeyer_array, mtype='mach'):
                                        mtype:prandtlmeyer_array})
     return M, V, U
 
-#Unit Conversions
+# Unit Conversions
 
-def conv(valuesToConvert, inputUnits, outputUnits):
+def conv(values, input_units, output_units):
     """
     Convert from units to desired units.
 
     http://www.mathworks.nl/help/aerotbx/unit-conversions-1.html
     """
-    convertedValues = aerotbx.convert(valuesToConvert, inputUnits,
-                                      outputUnits)
-    return convertedValues
+    converted_values = aerotbx.convert(values, input_units,
+                                      output_units)
+    return converted_values

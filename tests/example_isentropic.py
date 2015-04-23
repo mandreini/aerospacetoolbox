@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from aerotbx import flowisentropic
 
-#import the windtunnel distribution data (from the HSWTT reader, Table 2)
+# import the windtunnel distribution data (from the HSWTT reader, Table 2)
 dist = np.matrix("""
 [19.8 30.112 1.843; 24.8 27.325 1.673;
 29.8 24.832 1.520; 34.8 22.642 1.386;
@@ -20,17 +20,17 @@ dist = np.matrix("""
 176.8 29.832 1.826; 179.8 29.890 1.830;
 182.8 29.935 1.832; 194.8 30.000 1.836]""")
 
-#import the windtunnel experimental data (obtained during the HSWTT)
+# import the windtunnel experimental data (obtained during the HSWTT)
 data1 = np.loadtxt("hswtdata_example.txt", skiprows=5)
 
-#use the distribution data to calculate the theoretical isentropic flow
+# use the distribution data to calculate the theoretical isentropic flow
 m1, t1, p1, r1, a1 = flowisentropic(sub=dist[:,2])
 m2, t2, p2, r2, a2 = flowisentropic(sup=dist[:,2])
 
-#Stich the subsonic and supersonic solutions together
+# Stitch the subsonic and supersonic solutions together
 psubsup = np.vstack((p1[:9],p2[9:]))
 
-#plot the theoretical and experimental data
+# plot the theoretical and experimental data
 plt.plot(dist[:,0], psubsup, 'k--', label="Theory")
 plt.plot(data1[:,0], data1[:,1], 'k^-', label="Experiment")
 plt.axis([19.8, 194.8, 0, 1])
